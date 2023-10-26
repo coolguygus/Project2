@@ -1,0 +1,10 @@
+main: main.o fraction.o dictionary.o
+	g++ -o main main.o fraction.o dictionary.o
+main.o: main.cc fraction.h dictionary.h stack.h dictionary.cpp
+	g++ -c main.cc
+fraction.o: fraction.cc fraction.h
+	g++ -c fraction.cc
+stack.o: stack.h
+	g++ -c stack.o
+dictionary.o: dictionary.cpp dictionary.h
+	g++ -c dictionary.cpp
