@@ -1,45 +1,39 @@
 #ifndef _DICTIONARY_H
 #define _DICTIONARY_H
 
+
+#include "fraction.h"
+#include "stack.h"
 #include <cstdint>
 #include <stdexcept>
 #include <string>
-#include <iostream>
-#include <cctype>
-#include <cstdlib>
-#include <cstring>
-#include "fraction.h"
 
-using namespace std;
-
-const uint32_t TABLE_SIZE = 101;
-
-class Dictionary {
-public:
-    Dictionary() { clear(); } 
-    ~Dictionary() = default;
-
-    bool isEmpty() { 
-        return nItems == 0; 
-    }
-    uint32_t size() { 
-        return nItems; 
-    }
-
-    void clear();
-    void add(const string,const Fraction);
-    Fraction search(const string);
-    void remove(const string &);
-
-private:
-    string
-        keys[TABLE_SIZE];
-    Fraction
-        values[TABLE_SIZE];
-    uint32_t
-        nItems;
-
+enum DictionaryStatus {
+    UNUSED, IN_USE, DELETED
 };
 
+const int TABLE_SIZE = 127;
 
-#endif //_DICTIONARY_H
+
+class Dictionary{
+public:
+    Dictionary() { clear(); }
+    ~Dictionary() = default;
+
+    bool isEmpty() { return index == 0; }
+    uint32_t size() { return index; }
+
+    void clear();
+
+    void add(const std::string &, const Fraction);
+
+    Fraction search(const std::string &);
+
+private:
+    int index;
+    std::string keys[TABLE_SIZE];
+    Fraction values[TABLE_SIZE];
+    DictionaryStatus status[TABLE_SIZE];
+};
+
+#endif

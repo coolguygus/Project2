@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 
-const int STACK_SIZE = 10;
+const int STACK_SIZE = 100;
 
 template <class StackType>
 class Stack {
